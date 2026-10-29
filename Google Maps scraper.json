@@ -1,0 +1,42 @@
+{
+  "name": "Google Maps - Scraping",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [{ "field": "minutes", "minutesInterval": 30 }]
+        }
+      },
+      "id": "8471c3e2-b314-417f-97e4-fcbd7cf31f40",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [-2144, 336],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://apify.com",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendHeaders": true,
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"searchStringsArray\": [\"{{ $json.Query }}\"],\n  \"locationQuery\": \"{{ $json.Location }}\"\n}",
+        "options": {}
+      },
+      "id": "9e6bca73-8460-49a1-87f9-e61cc992064e",
+      "name": "Start Apify Scraping Job",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [-1712, 336],
+      "typeVersion": 4.2,
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "rLyDxFKbwoXQwwgm",
+          "name": "Bearer Auth - Apify"
+        }
+      }
+    }
+  ],
+  "pinData": {}
+}

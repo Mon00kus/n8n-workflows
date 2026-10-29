@@ -1,0 +1,77 @@
+{
+  "name": "Pokemon Scraper",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [-2368, -912],
+      "id": "59c926a6-31ae-49e3-89d6-042c0f926bbe",
+      "name": "Click"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Pra0wkbelEOOWjC1i12Z8U8hzFLFpuYBcgdVfa3feZ4",
+          "mode": "list",
+          "cachedResultName": "Pokemon tabla de información"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Pokemons"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [-2160, -608],
+      "id": "93be54d1-4150-4d05-a257-86bb4c5fad66",
+      "name": "Get pokemon id",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ajMeIcIK879QQYD2",
+          "name": "Google Sheets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            { "id": "98f60d02", "name": "id", "value": "={{ $json.id }}", "type": "number" },
+            { "id": "37569511", "name": "name", "value": "={{ $json.name }}", "type": "string" }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [-1600, -608],
+      "id": "f600b309-5990-4e41-a477-0669f0aee114",
+      "name": "Extract pokemon data"
+    },
+    {
+      "parameters": {
+        "sendTo": "tu-correo-anonimo@gmail.com",
+        "subject": "N8N learning",
+        "message": "=<h1>El proceso terminó</h1>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [-976, -608],
+      "id": "bd4dec6a-ae6b-4669-9435-dbbdc9bef409",
+      "name": "Send a message of process finalization",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "aXPCSroO3p7bi9Q6",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {}
+}
